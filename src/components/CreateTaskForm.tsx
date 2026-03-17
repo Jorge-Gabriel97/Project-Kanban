@@ -1,5 +1,5 @@
 import { PlusIcon } from "@radix-ui/react-icons"
-import { Box, Button, Dialog, Flex, RadioGroup, Text, TextArea, TextField } from "@radix-ui/themes"
+import { Badge, Box, Button, Dialog, Flex, RadioGroup, Text, TextArea, TextField } from "@radix-ui/themes"
 
 export const CreateTaskForm: React.FC = () => {
     return (
@@ -40,15 +40,18 @@ export const CreateTaskForm: React.FC = () => {
                                 <Text as="div" mb="2">Situação</Text>
                                 <RadioGroup.Root name="status" defaultValue="todo">
                                     <RadioGroup.Item value="todo">
-                                        Pendente
+                                        <Badge color="gray">
+                                            Pendente
+                                        </Badge>
+
                                     </RadioGroup.Item>
 
                                     <RadioGroup.Item value="doing">
-                                        Em Execução
+                                        <Badge color="yellow">Em Execução</Badge>
                                     </RadioGroup.Item>
 
                                     <RadioGroup.Item value="done">
-                                        Concluida
+                                        <Badge color="green">Concluida</Badge>
                                     </RadioGroup.Item>
                                 </RadioGroup.Root>
                             </Box>
@@ -56,15 +59,15 @@ export const CreateTaskForm: React.FC = () => {
                                 <Text as="div" mb="2">Prioridade</Text>
                                 <RadioGroup.Root name="priority" defaultValue="low">
                                     <RadioGroup.Item value="low">
-                                        Baixa
+                                        <Badge color="sky">Baixa</Badge>
                                     </RadioGroup.Item>
 
                                     <RadioGroup.Item value="medium">
-                                        Média
+                                         <Badge color="amber">Média</Badge>
                                     </RadioGroup.Item>
 
                                     <RadioGroup.Item value="high">
-                                        Alta
+                                        <Badge color="tomato">Alta</Badge> 
                                     </RadioGroup.Item>
                                 </RadioGroup.Root>
                             </Box>
