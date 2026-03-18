@@ -1,7 +1,38 @@
 import { PlusIcon } from "@radix-ui/react-icons"
 import { Badge, Box, Button, Dialog, Flex, RadioGroup, Text, TextArea, TextField } from "@radix-ui/themes"
+import { z } from "zod" 
+
+const CreateTaskSchema = z.object({
+    title: z.string().min(1, "O título é obrigatório"),
+    description: z.string().min(1, "A descrição é obrigatória"),
+    status: z.enum(["todo", "doing", "done"]),
+    priority: z.enum(["low", "medium", "high"])
+})
+
 
 export const CreateTaskForm: React.FC = () => {
+
+
+    const handleSubmit = async (ev: React.FormEvent<HTMLFormElement>) => {
+        ev.preventDefault() 
+        
+        const formData = new FormData(ev.currentTarget)
+
+        const title = formData.get("title")
+        const description = formData.get("description") 
+        const status = formData.get("status")
+        const priority = formData.get("priority")
+
+        
+
+        ev.currentTarget.reset()
+
+        const taskData = CreateTaskSchema.parse({title, description, status, priority})
+        alert(JSON.stringify(taskData))
+
+        
+    }
+
     return (
         <Dialog.Root>
             <Dialog.Trigger>
@@ -16,9 +47,9 @@ export const CreateTaskForm: React.FC = () => {
                     Adicione novas tarefas ao quadro
                 </Dialog.Description>
 
-                <form>
+                
+                <form onSubmit={handleSubmit}>
                     <Flex direction="column" gap="4">
-
 
                         <Box maxWidth="32rem">
                             <Box mb="2">
@@ -26,7 +57,6 @@ export const CreateTaskForm: React.FC = () => {
                             </Box>
                             <TextField.Root placeholder="Defina um título" name="title" id="title" autoFocus required />
                         </Box>
-
 
                         <Box maxWidth="32rem">
                             <Box mb="2">
@@ -43,7 +73,6 @@ export const CreateTaskForm: React.FC = () => {
                                         <Badge color="gray">
                                             Pendente
                                         </Badge>
-
                                     </RadioGroup.Item>
 
                                     <RadioGroup.Item value="doing">
@@ -63,17 +92,16 @@ export const CreateTaskForm: React.FC = () => {
                                     </RadioGroup.Item>
 
                                     <RadioGroup.Item value="medium">
-                                         <Badge color="amber">Média</Badge>
+                                        <Badge color="amber">Média</Badge>
                                     </RadioGroup.Item>
 
                                     <RadioGroup.Item value="high">
-                                        <Badge color="tomato">Alta</Badge> 
+                                        <Badge color="tomato">Alta</Badge>
                                     </RadioGroup.Item>
                                 </RadioGroup.Root>
                             </Box>
 
                         </Flex>
-
 
                         <Flex gap="2" justify="end">
                             <Dialog.Close>
