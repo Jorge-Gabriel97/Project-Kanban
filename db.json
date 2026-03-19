@@ -1,4 +1,46 @@
 {
-  "tasks": [],
-  "$schema": "./node_modules/json-server/schema.json"
+  "tasks": [
+    {
+      "id": "1",
+      "title": "Configurar banco de dados",
+      "description": "Criar as tabelas e relacionamentos principais do sistema.",
+      "status": "todo",
+      "priority": "high"
+    },
+    {
+      "id": "2",
+      "title": "Atualizar documentação",
+      "description": "Adicionar os passos de instalação no arquivo principal do projeto.",
+      "status": "todo",
+      "priority": "low"
+    },
+    {
+      "id": "3",
+      "title": "Criar tela de login",
+      "description": "Implementar o formulário e a integração com o sistema de autenticação.",
+      "status": "doing",
+      "priority": "medium"
+    },
+    {
+      "id": "4",
+      "title": "Corrigir bug da API",
+      "description": "Ajustar os cabeçalhos do servidor para permitir a comunicação com o frontend.",
+      "status": "doing",
+      "priority": "high"
+    },
+    {
+      "id": "5",
+      "title": "Prototipar Dashboard",
+      "description": "Desenhar as telas iniciais da interface de usuário utilizando o Figma.",
+      "status": "done",
+      "priority": "medium"
+    },
+    {
+      "id": "6",
+      "title": "Reunião de alinhamento",
+      "description": "Apresentar a primeira versão funcional da aplicação para a equipe.",
+      "status": "done",
+      "priority": "low"
+    }
+  ]
 }

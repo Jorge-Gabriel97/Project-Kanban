@@ -5,11 +5,13 @@ import { taskService } from '../services/api'
 export interface TasksContextData {
     tasks: Task[];
     createTask: (attributes: Omit<Task, "id">) => Promise<void>;
-    updateTask: (id: string, attributes: Partial<Omit<Task, "id">>) => Promise<void>;
-    deleteTask: (id: string) => Promise<void>;
+    // Permitimos string OU number para ser à prova de falhas
+    updateTask: (id: string | number, attributes: Partial<Omit<Task, "id">>) => Promise<void>;
+    deleteTask: (id: string | number) => Promise<void>;
 }
 
-export const TasksContext = createContext({} as TasksContextData)
+
+export const TasksContext = createContext<TasksContextData>({} as TasksContextData)
 
 interface TasksContextProviderProps {
     children: ReactNode
@@ -26,17 +28,17 @@ export const TasksContextProvider: React.FC<TasksContextProviderProps> = ({ chil
 
     const createTask = async (attributes: Omit<Task, "id">) => {
         const newTask = await taskService.createTask(attributes)
-
         setTasks((currentState) => [...currentState, newTask])
     }
 
-    const updateTask = async (id: string, attributes: Partial<Omit<Task, "id">>): Promise<void> => {
-        await taskService.updateTask(id, attributes)
+    const updateTask = async (id: string | number, attributes: Partial<Omit<Task, "id">>): Promise<void> => {
+        // Garantimos que a API receba uma string
+        await taskService.updateTask(String(id), attributes)
 
         setTasks((currentState) => {
             const updatedTasks = [...currentState]
-            const taskIndex = updatedTasks.findIndex((task) => task.id === id)
-
+            // Comparamos String com String para nunca falhar!
+            const taskIndex = updatedTasks.findIndex((task) => String(task.id) === String(id))
 
             if (taskIndex !== -1) {
                 updatedTasks[taskIndex] = { ...updatedTasks[taskIndex], ...attributes }
@@ -46,9 +48,10 @@ export const TasksContextProvider: React.FC<TasksContextProviderProps> = ({ chil
         })
     }
 
-    const deleteTask = async (id: string): Promise<void> => {
-        await taskService.deleteTask(id)
-        setTasks((currentState) => currentState.filter((task) => task.id !== id))
+    const deleteTask = async (id: string | number): Promise<void> => {
+        await taskService.deleteTask(String(id))
+        // Comparamos String com String aqui também
+        setTasks((currentState) => currentState.filter((task) => String(task.id) !== String(id)))
     }
 
     return (
