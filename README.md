@@ -1,73 +1,48 @@
-# React + TypeScript + Vite
+# 📋 React Kanban Board
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+![React](https://img.shields.io/badge/react-%2320232a.svg?style=for-the-badge&logo=react&logoColor=%2361DAFB)
+![TypeScript](https://img.shields.io/badge/typescript-%23007ACC.svg?style=for-the-badge&logo=typescript&logoColor=white)
+![Vite](https://img.shields.io/badge/vite-%23646CFF.svg?style=for-the-badge&logo=vite&logoColor=white)
+![Vitest](https://img.shields.io/badge/Vitest-6E9F18?style=for-the-badge&logo=vitest&logoColor=white)
 
-Currently, two official plugins are available:
+## 📖 Visão Geral
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+Um sistema de gerenciamento de tarefas no formato Kanban, construído com foco em performance, tipagem estática e arquitetura escalável. 
 
-## React Compiler
+A aplicação foi desenvolvida aplicando rigorosamente a metodologia **Follow the Data Flow** (Seguindo o Fluxo dos Dados), garantindo que o ciclo de vida da informação — desde a entrada no formulário, passando pelo gerenciamento de estado global (Context API), até a persistência no banco de dados (API REST) e a renderização na tela — seja previsível, limpo e à prova de falhas estruturais.
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+## ✨ Funcionalidades
 
-## Expanding the ESLint configuration
+* **Gestão Completa de Tarefas (CRUD):** Criação, leitura, atualização de status (transição entre colunas) e exclusão de cartões.
+* **Transições Dinâmicas:** Movimentação fluida de tarefas entre as etapas "Para Fazer", "Em Andamento" e "Concluída".
+* **Consumo de API RESTful:** Integração robusta com backend simulado, utilizando os métodos HTTP corretos (`POST`, `PATCH`, `DELETE`) para preservar a integridade dos dados.
+* **Sistema de Identificação v1:** Compatibilidade total com as novas regras de geração de IDs em formato de string.
+* **Tipagem Avançada:** Uso extensivo de TypeScript (Interfaces, Omit, Partial) para prevenir erros em tempo de desenvolvimento.
+* **Testes Automatizados:** Suíte de testes unitários configurada e funcional utilizando Vitest e React Testing Library para garantir a renderização fiel dos componentes críticos da interface.
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+## 🛠️ Tecnologias Utilizadas
 
-```js
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
+**Frontend:**
+* React (via Vite)
+* TypeScript
+* Radix UI (Componentização e Estilização acessível)
+* HTML, CSS e JavaScript avançado
 
-      // Remove tseslint.configs.recommended and replace with this
-      tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      tseslint.configs.stylisticTypeChecked,
+**Gerenciamento de Estado & Contexto:**
+* React Context API
+* Hooks (`useState`, `useEffect`, `useContext`)
 
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
-```
+**Backend Simulado (Mock API):**
+* JSON Server (v1)
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+**Qualidade e Testes:**
+* Vitest
+* React Testing Library (`jest-dom`, `jsdom`)
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
+## 🚀 Instalação
 
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
-```
+Para rodar este projeto localmente, é necessário ter o Node.js instalado em sua máquina. O ecossistema exige a execução simultânea da interface e da API simulada.
+
+1. **Clone o repositório e acesse a pasta:**
+  ```bash
+      cd Kanban
