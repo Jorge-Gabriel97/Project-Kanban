@@ -1,6 +1,8 @@
 import { PlusIcon } from "@radix-ui/react-icons"
 import { Badge, Box, Button, Dialog, Flex, RadioGroup, Text, TextArea, TextField } from "@radix-ui/themes"
-import { z } from "zod" 
+import { z } from "zod"
+import { useContext } from "react"
+import { TasksContext } from "../contexts/TasksContext"
 
 const CreateTaskSchema = z.object({
     title: z.string().min(1, "O título é obrigatório"),
@@ -11,26 +13,27 @@ const CreateTaskSchema = z.object({
 
 
 export const CreateTaskForm: React.FC = () => {
+    const { createTask } = useContext(TasksContext)
 
 
     const handleSubmit = async (ev: React.FormEvent<HTMLFormElement>) => {
-        ev.preventDefault() 
-        
+        ev.preventDefault()
+
         const formData = new FormData(ev.currentTarget)
 
         const title = formData.get("title")
-        const description = formData.get("description") 
+        const description = formData.get("description")
         const status = formData.get("status")
         const priority = formData.get("priority")
 
-        
+
 
         ev.currentTarget.reset()
 
-        const taskData = CreateTaskSchema.parse({title, description, status, priority})
-        alert(JSON.stringify(taskData))
+        const taskData = CreateTaskSchema.parse({ title, description, status, priority })
+        await createTask(taskData)
 
-        
+
     }
 
     return (
@@ -47,7 +50,7 @@ export const CreateTaskForm: React.FC = () => {
                     Adicione novas tarefas ao quadro
                 </Dialog.Description>
 
-                
+
                 <form onSubmit={handleSubmit}>
                     <Flex direction="column" gap="4">
 
