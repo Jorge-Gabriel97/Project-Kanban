@@ -27,13 +27,6 @@
       "description": "Desenvolver os testes automatizados na nova funcionalidade do aplicativo.",
       "status": "todo",
       "priority": "medium"
-    },
-    {
-      "id": "db59",
-      "title": "teste2",
-      "description": "teste2",
-      "status": "done",
-      "priority": "high"
     }
   ],
   "$schema": "./node_modules/json-server/schema.json"

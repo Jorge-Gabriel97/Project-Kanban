@@ -1,12 +1,14 @@
 import { Badge, Button, Card, Flex, Heading, Text } from "@radix-ui/themes" // Importação do Text adicionada
 
 import type { Task, TaskPriority, TaskStatus } from "../Entities/Task" 
+import { useTasks } from "../hooks/useTasks"
 
 interface TaskCardProps {
     task: Task
 }
 
 export const TaskCard: React.FC<TaskCardProps> = ({task}) => {
+    const  {deleteTask} = useTasks()
     
     const getActionText = (status: TaskStatus) => {
         const actionTexts = {
@@ -36,6 +38,13 @@ export const TaskCard: React.FC<TaskCardProps> = ({task}) => {
         return priorityColors[priority]
     }
 
+    const handleDelete = (id: number) =>{
+        const comfirmation = confirm("Confirma da exclusão da tarefa?")
+        if(comfirmation){
+            deleteTask(id)
+        }
+    }
+
     return(
         <Card>
             <Flex align="center" gap="4">
@@ -49,7 +58,7 @@ export const TaskCard: React.FC<TaskCardProps> = ({task}) => {
                 <Button color={getActionColor(task.status)}>
                     {getActionText(task.status)}
                 </Button>
-                <Button color="red">Excluir</Button>
+                <Button color="red" onClick={() => handleDelete(task.id)}>Excluir</Button>
             </Flex>
         </Card>
     )
